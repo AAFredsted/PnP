@@ -1,0 +1,78 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/aaf/Desktop/Projects/SOME/SOME.fsproj": {}
+  },
+  "projects": {
+    "/home/aaf/Desktop/Projects/SOME/SOME.fsproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/aaf/Desktop/Projects/SOME/SOME.fsproj",
+        "projectName": "SOME.App",
+        "projectPath": "/home/aaf/Desktop/Projects/SOME/SOME.fsproj",
+        "packagesPath": "/home/aaf/.nuget/packages/",
+        "outputPath": "/home/aaf/Desktop/Projects/SOME/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/aaf/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "/usr/lib/dotnet/sdk/8.0.105/FSharp/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "FSharp.Core": {
+              "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
+              "target": "Package",
+              "version": "[8.0.102, )",
+              "generatePathProperty": true
+            },
+            "Giraffe": {
+              "target": "Package",
+              "version": "[6.0.0, )",
+              "generatePathProperty": true
+            },
+            "Giraffe.ViewEngine": {
+              "target": "Package",
+              "version": "[1.3.*, )",
+              "generatePathProperty": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.105/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
