@@ -43,3 +43,4 @@
 /home/aaf/Desktop/Projects/SOME/obj/Debug/net8.0/SOME.App.pdb
 /home/aaf/Desktop/Projects/SOME/obj/Debug/net8.0/SOME.genruntimeconfig.cache
 /home/aaf/Desktop/Projects/SOME/obj/Debug/net8.0/ref/SOME.App.dll
+/home/aaf/Desktop/Projects/SOME/obj/Debug/net8.0/SOME.sourcelink.json
