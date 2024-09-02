@@ -1,8 +1,8 @@
 -- Insert users
-INSERT INTO users (username, password, email) VALUES
-('john_doe', 'hashed_password_123', 'john@example.com'),
-('jane_smith', 'hashed_password_456', 'jane@example.com'),
-('alice_jones', 'hashed_password_789', 'alice@example.com');
+INSERT INTO users ( username, password) VALUES
+('john_doe', 'hashed_password_123'),
+('jane_smith', 'hashed_password_456'),
+('alice_jones', 'hashed_password_789');
 
 -- Insert posts
 INSERT INTO posts (user_id, content) VALUES
