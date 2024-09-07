@@ -2,6 +2,7 @@ module SOME.DB
 
 open System
 open Npgsql.FSharp
+open BCrypt.Net
 
 // Define the 'User' type
 type User = {
@@ -45,3 +46,19 @@ let getPosts () : Post list =
             Content = read.text "content"
             CreatedAt = read.dateTime "created_at"
         })
+
+let createUser username password = 
+    try 
+        let hashedPassword = BCrypt.Net.BCrypt.HashPassword(password)  // Hash the password
+
+        // Insert the user into the database
+        Sql.connect connectionString 
+        |> Sql.query "INSERT INTO users (username, password) VALUES (@username, @password)"
+        |> Sql.parameters [ "@username", SqlValue.String username
+                            "@password", SqlValue.String hashedPassword ]
+        |> Sql.executeNonQuery
+        |> ignore
+        Ok ()
+        
+    with
+    | ex -> Error ex.Message

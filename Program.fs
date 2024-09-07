@@ -33,6 +33,29 @@ let frontPageHandler (next: HttpFunc) (ctx: HttpContext) =
     let view = frontPage (users, posts)  // Pass the data to the frontPage view
     htmlView view next ctx  // Render the view as HTML
 
+// Handler to allow for application to send data to user
+
+let createUserHandler (next: HttpFunc) (ctx: HttpContext) =
+    task {
+        // Explicitly try to get form values by key
+        let maybeUsername = ctx.GetFormValue("username")
+        let maybePassword = ctx.GetFormValue("password")
+
+        // Ensure that both username and password are provided
+        match maybeUsername, maybePassword with
+        | Some username, Some password ->
+            // Call your DB function to create the user
+            match SOME.DB.createUser username password with
+            | Ok _ ->
+                return! text "User created successfully!" next ctx
+            | Error errMsg ->
+                return! text $"Error: {errMsg}" next ctx
+        | _ ->
+            // Handle case where form fields are missing
+            return! text "Missing username or password" next ctx
+    }
+
+
 // ---------------------------------
 // Web app
 // ---------------------------------
@@ -45,6 +68,10 @@ let webApp =
                 route "/about" >=> htmlView aboutPage  // Static about page
                 route "/login" >=> htmlView loginPage
                 route "/signup" >=> htmlView signUpPage
+            ]
+        POST >=> 
+            choose [
+                route "/createUser" >=> createUserHandler
             ]
         setStatusCode 404 >=> text "Not Found"
     ]
