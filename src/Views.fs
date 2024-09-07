@@ -32,8 +32,13 @@ let frontPage (users: User list, posts: Post list) =
             h1 [ _class "pnp-h1" ] [ rawText "Push and Pull (P&P)" ]
             h2 [ _class "pnp-h2" ] [ rawText "Small social network for peeps"]
             div [ _class "push"] [
-                button [ _class "logIn" ] [ rawText "Login"]
-                button [ _class "signUp"] [ rawText "Sign Up"]
+                a [ _href "/login"] [
+                    button [ _class "login" ] [ rawText "Login"]
+                ]
+                a [ _href "/signup"] [
+                    button [ _class "signUp"] [ rawText "Sign Up"]
+                ]
+                
             ]
             div [ _class "pnp-content-box "] [
                 h3 [] [ rawText "Users" ]
@@ -77,4 +82,17 @@ let aboutPage =
     ] |> masterView "Some.info"
 
 
+let loginPage =
+    [
+        main [] [
 
+        ]
+    ] |> masterView "Some.login"
+
+
+let signUpPage =    
+    [
+        main [] [
+
+        ]
+    ] |> masterView "Some.signup"

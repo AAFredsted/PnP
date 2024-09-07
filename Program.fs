@@ -43,6 +43,8 @@ let webApp =
             choose [
                 route "/" >=> frontPageHandler  // Use the new handler for dynamic front page
                 route "/about" >=> htmlView aboutPage  // Static about page
+                route "/login" >=> htmlView loginPage
+                route "/signup" >=> htmlView signUpPage
             ]
         setStatusCode 404 >=> text "Not Found"
     ]
