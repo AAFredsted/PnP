@@ -55,6 +55,16 @@
               "version": "[1.3.*, )",
               "generatePathProperty": true
             },
+            "Microsoft.AspNetCore.Session": {
+              "target": "Package",
+              "version": "(, )",
+              "generatePathProperty": true
+            },
+            "Microsoft.Extensions.Caching.StackExchangeRedis": {
+              "target": "Package",
+              "version": "(, )",
+              "generatePathProperty": true
+            },
             "Npgsql.Fsharp": {
               "target": "Package",
               "version": "[5.7.0, )",

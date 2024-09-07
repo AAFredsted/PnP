@@ -49,7 +49,7 @@ let getPosts () : Post list =
 
 let createUser username password = 
     try 
-        let hashedPassword = BCrypt.Net.BCrypt.HashPassword(password)  // Hash the password
+        let hashedPassword = BCrypt.HashPassword(password)  // Hash the password
 
         // Insert the user into the database
         Sql.connect connectionString 
@@ -62,3 +62,23 @@ let createUser username password =
         
     with
     | ex -> Error ex.Message
+
+let verifyPassword hashedPassword plainPassword =
+    BCrypt.Verify(plainPassword, hashedPassword)
+
+let getUserByUsername username =
+    try
+        Sql.connect connectionString
+        |> Sql.query "SELECT id, username, password, created_at FROM users WHERE username = @username"
+        |> Sql.parameters [ "@username", SqlValue.String username ]
+        |> Sql.executeRow (fun read -> 
+            {
+                Id = read.int "id"
+                Username = read.text "username"
+                Password = read.text "password"
+                CreatedAt = read.dateTime "created_at"
+            }
+        )
+        |> Some  // Return Some(user) if found
+    with
+    | :? System.Exception -> None  // Return None if an exception occurs (e.g., no user found)

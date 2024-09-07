@@ -85,9 +85,16 @@ let aboutPage =
 let loginPage =
     [
         main [] [
+            form [ _method "post"; _action "/loginUser"] [  // Add method="post" for form submission
+            rawText "Username" 
+            input [ _type "text"; _name "username" ]  // Add name attribute for binding
+            rawText "Password"
+            input [ _type "password"; _name "password" ]  // Add name attribute for binding
+            input [ _type "submit"; _value "Create User" ]  // Submit button
+            ]
 
         ]
-    ] |> masterView "Some.login"
+    ] |> masterView "Some.Login"
 
 
 

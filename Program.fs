@@ -12,6 +12,7 @@ open Microsoft.Extensions.DependencyInjection
 open Giraffe
 open SOME.Views
 open SOME.DB 
+open SOME.Login
 
 // ---------------------------------
 // Models
@@ -55,6 +56,48 @@ let createUserHandler (next: HttpFunc) (ctx: HttpContext) =
             return! text "Missing username or password" next ctx
     }
 
+let loginUserHandler (next: HttpFunc) (ctx: HttpContext) = 
+    task {
+
+        // Extract username and password from form data
+        let username = 
+            match ctx.GetFormValue("username") with
+            | Some s -> s
+            | None -> ""
+
+        let password = 
+            match ctx.GetFormValue("password") with
+            | Some s -> s
+            | None -> ""
+
+        // Check if the username or password is missing
+        if username = "" then
+            return! text "Username field is empty." next ctx
+        elif password = "" then
+            return! text "Password field is empty." next ctx
+        else
+            // Check if user exists
+            match SOME.DB.getUserByUsername username with
+            | Some user ->
+                // Verify password
+                if SOME.DB.verifyPassword user.Password password then
+                    // Set session values and return success
+                    ctx.Session.SetString("userId", string user.Id)
+                    ctx.Session.SetString("username", user.Username)
+                    return! text "Login successful!" next ctx
+                else
+                    // Incorrect password
+                    return! text "Invalid username or password" next ctx
+            | None ->
+                // User not found
+                return! text "User not found." next ctx
+    }
+
+let logoutHandler (next: HttpFunc) (ctx: HttpContext) =
+    task {
+        ctx.Session.Clear()  // Clear the session
+        return! redirectTo false "/" next ctx  // Redirect to home page
+    }
 
 // ---------------------------------
 // Web app
@@ -68,10 +111,12 @@ let webApp =
                 route "/about" >=> htmlView aboutPage  // Static about page
                 route "/login" >=> htmlView loginPage
                 route "/signup" >=> htmlView signUpPage
+                route "/logout" >=> logoutHandler
             ]
         POST >=> 
             choose [
                 route "/createUser" >=> createUserHandler
+                route "/loginUser" >=> loginUserHandler
             ]
         setStatusCode 404 >=> text "Not Found"
     ]
@@ -108,12 +153,22 @@ let configureApp (app : IApplicationBuilder) =
         app .UseGiraffeErrorHandler(errorHandler)
             .UseHttpsRedirection())
         .UseCors(configureCors)
+        .UseSession()
         .UseStaticFiles()
         .UseGiraffe(webApp)
 
 let configureServices (services : IServiceCollection) =
     services.AddCors()    |> ignore
     services.AddGiraffe() |> ignore
+    services.AddStackExchangeRedisCache(fun options ->
+            options.Configuration <- "localhost:6379"  // Configure your Redis connection
+            options.InstanceName <- "SampleInstance:"   // Set a name for your Redis instance
+        )
+    services.AddSession( fun options -> 
+        options.IdleTimeout <- TimeSpan.FromMinutes(30.0) // Session timeout of 30 minutes
+        options.Cookie.HttpOnly <- true
+        options.Cookie.IsEssential <- true
+    ) |> ignore
 
 let configureLogging (builder : ILoggingBuilder) =
     builder.AddConsole()
