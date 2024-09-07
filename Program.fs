@@ -7,9 +7,12 @@ open Microsoft.AspNetCore.Cors.Infrastructure
 open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.Hosting
 open Microsoft.Extensions.Logging
+open Microsoft.AspNetCore.Http 
 open Microsoft.Extensions.DependencyInjection
 open Giraffe
 open SOME.Views
+open SOME.DB 
+
 // ---------------------------------
 // Models
 // ---------------------------------
@@ -20,6 +23,17 @@ type Message =
     }
 
 // ---------------------------------
+// Handlers for Dynamic Data
+// ---------------------------------
+
+// Handler to get users and posts and render the front page
+let frontPageHandler (next: HttpFunc) (ctx: HttpContext) =
+    let users = getUsers()  // Fetch users from DB
+    let posts = getPosts()  // Fetch posts from DB
+    let view = frontPage (users, posts)  // Pass the data to the frontPage view
+    htmlView view next ctx  // Render the view as HTML
+
+// ---------------------------------
 // Web app
 // ---------------------------------
 
@@ -27,8 +41,8 @@ let webApp =
     choose [
         GET >=>
             choose [
-                route "/" >=> htmlView frontPage
-                route "/about" >=> htmlView aboutPage
+                route "/" >=> frontPageHandler  // Use the new handler for dynamic front page
+                route "/about" >=> htmlView aboutPage  // Static about page
             ]
         setStatusCode 404 >=> text "Not Found"
     ]

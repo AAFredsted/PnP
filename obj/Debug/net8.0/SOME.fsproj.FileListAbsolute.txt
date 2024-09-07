@@ -44,3 +44,5 @@
 /home/aaf/Desktop/Projects/SOME/obj/Debug/net8.0/SOME.genruntimeconfig.cache
 /home/aaf/Desktop/Projects/SOME/obj/Debug/net8.0/ref/SOME.App.dll
 /home/aaf/Desktop/Projects/SOME/obj/Debug/net8.0/SOME.sourcelink.json
+/home/aaf/Desktop/Projects/SOME/bin/Debug/net8.0/Npgsql.dll
+/home/aaf/Desktop/Projects/SOME/bin/Debug/net8.0/Npgsql.FSharp.dll

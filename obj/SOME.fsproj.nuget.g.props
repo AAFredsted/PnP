@@ -14,6 +14,7 @@
   </ItemGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">/home/aaf/.nuget/packages/fsharp.core/8.0.102</PkgFSharp_Core>
+    <PkgNpgsql_FSharp Condition=" '$(PkgNpgsql_FSharp)' == '' ">/home/aaf/.nuget/packages/npgsql.fsharp/5.7.0</PkgNpgsql_FSharp>
     <PkgGiraffe_ViewEngine Condition=" '$(PkgGiraffe_ViewEngine)' == '' ">/home/aaf/.nuget/packages/giraffe.viewengine/1.3.0</PkgGiraffe_ViewEngine>
     <PkgGiraffe Condition=" '$(PkgGiraffe)' == '' ">/home/aaf/.nuget/packages/giraffe/6.0.0</PkgGiraffe>
   </PropertyGroup>
