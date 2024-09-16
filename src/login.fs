@@ -16,7 +16,7 @@ let isAuthenticated (ctx: HttpContext) : bool =
 // Protect routes that require authentication
 let protectedRouteHandler (next: HttpFunc) (ctx: HttpContext) =
     if isAuthenticated ctx then
-        next ctx  // Allow access
+        redirectTo false "/" next ctx
     else
         // Redirect to login page if not authenticated
         redirectTo false "/login" next ctx

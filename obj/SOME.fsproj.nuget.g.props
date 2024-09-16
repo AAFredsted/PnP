@@ -16,7 +16,7 @@
     <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">/home/aaf/.nuget/packages/fsharp.core/8.0.102</PkgFSharp_Core>
     <PkgNpgsql_FSharp Condition=" '$(PkgNpgsql_FSharp)' == '' ">/home/aaf/.nuget/packages/npgsql.fsharp/5.7.0</PkgNpgsql_FSharp>
     <PkgMicrosoft_Extensions_Caching_StackExchangeRedis Condition=" '$(PkgMicrosoft_Extensions_Caching_StackExchangeRedis)' == '' ">/home/aaf/.nuget/packages/microsoft.extensions.caching.stackexchangeredis/2.2.0</PkgMicrosoft_Extensions_Caching_StackExchangeRedis>
-    <PkgMicrosoft_AspNetCore_Session Condition=" '$(PkgMicrosoft_AspNetCore_Session)' == '' ">/home/aaf/.nuget/packages/microsoft.aspnetcore.session/1.0.0</PkgMicrosoft_AspNetCore_Session>
+    <PkgMicrosoft_AspNetCore_Session Condition=" '$(PkgMicrosoft_AspNetCore_Session)' == '' ">/home/aaf/.nuget/packages/microsoft.aspnetcore.session/2.2.0</PkgMicrosoft_AspNetCore_Session>
     <PkgGiraffe_ViewEngine Condition=" '$(PkgGiraffe_ViewEngine)' == '' ">/home/aaf/.nuget/packages/giraffe.viewengine/1.3.0</PkgGiraffe_ViewEngine>
     <PkgGiraffe Condition=" '$(PkgGiraffe)' == '' ">/home/aaf/.nuget/packages/giraffe/6.0.0</PkgGiraffe>
     <PkgBCrypt_Net-Next Condition=" '$(PkgBCrypt_Net-Next)' == '' ">/home/aaf/.nuget/packages/bcrypt.net-next/4.0.3</PkgBCrypt_Net-Next>

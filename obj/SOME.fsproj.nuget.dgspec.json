@@ -57,7 +57,7 @@
             },
             "Microsoft.AspNetCore.Session": {
               "target": "Package",
-              "version": "(, )",
+              "version": "[2.2.*, )",
               "generatePathProperty": true
             },
             "Microsoft.Extensions.Caching.StackExchangeRedis": {

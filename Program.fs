@@ -46,13 +46,12 @@ let createUserHandler (next: HttpFunc) (ctx: HttpContext) =
         match maybeUsername, maybePassword with
         | Some username, Some password ->
             // Call your DB function to create the user
-            match SOME.DB.createUser username password with
+            match createUser username password with
             | Ok _ ->
                 return! text "User created successfully!" next ctx
             | Error errMsg ->
                 return! text $"Error: {errMsg}" next ctx
         | _ ->
-            // Handle case where form fields are missing
             return! text "Missing username or password" next ctx
     }
 
@@ -84,7 +83,7 @@ let loginUserHandler (next: HttpFunc) (ctx: HttpContext) =
                     // Set session values and return success
                     ctx.Session.SetString("userId", string user.Id)
                     ctx.Session.SetString("username", user.Username)
-                    return! text "Login successful!" next ctx
+                    return! redirectTo false "/" next ctx 
                 else
                     // Incorrect password
                     return! text "Invalid username or password" next ctx
