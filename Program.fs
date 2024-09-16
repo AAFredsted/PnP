@@ -38,14 +38,11 @@ let frontPageHandler (next: HttpFunc) (ctx: HttpContext) =
 
 let createUserHandler (next: HttpFunc) (ctx: HttpContext) =
     task {
-        // Explicitly try to get form values by key
         let maybeUsername = ctx.GetFormValue("username")
         let maybePassword = ctx.GetFormValue("password")
 
-        // Ensure that both username and password are provided
         match maybeUsername, maybePassword with
         | Some username, Some password ->
-            // Call your DB function to create the user
             match createUser username password with
             | Ok _ ->
                 return! text "User created successfully!" next ctx
